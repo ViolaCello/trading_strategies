@@ -1,13 +1,20 @@
 ## VWAP Standard Deviation Bands Strategy 
 ## Take all trades back into the direction of the Anchored VWAP after crossing SD Bands 
 
+Results:
+Strategy report 5min chart
+Symbol: /ES:XCME
+Work Time: 7/20/20 10:40 AM - 2/11/21 10:20 AM
+Max trade P/L: $812.50
+Total P/L: ($838.44)
+Total order(s): 194
 
 declare hide_on_daily;
 
 input anchorTime = 0200;
 def anchorEnd = 1600;
 
-input ShowTodayOnly = yes;
+input ShowTodayOnly = no;
 def Today = if GetDay() == GetLastDay() then 1 else 0;
 def postAnchorTime = if SecondsFromTime(anchorTime) >= 0 then 1 else 0;
 def endAchorTime = if SecondsTillTime(anchorEnd) >= 0 then 1 else 0;
