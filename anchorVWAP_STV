@@ -1,4 +1,3 @@
-// Anchored VWAP
 declare hide_on_daily;
 
 input anchorTime = 0200;
@@ -14,6 +13,17 @@ def  volumeSum = compoundValue(1, if postAnchorTime and endAchorTime then volume
 def  volumeVwapSum = compoundValue(1, if postAnchorTime and endAchorTime then volumeVwapSum[1] + volume * vwap else 0, volume * vwap);
  
 plot anchorVWAP = if ShowTodayOnly and !Today then Double.NaN else if anchorTime then volumeVwapSum / volumeSum else Double.NaN;
+
+input price = close;
+input displace = 0;
+input length = 200;
+input Num_Dev_Dn = -2.0;
+input Num_Dev_up = 2.0;
+
+def sDev = stdev(data = close, length = 100);
+plot upper = anchorVWAP + (Num_Dev_Up) * sDev;
+plot lower = anchorVWAP + (Num_Dev_Dn * sDev);
+
 anchorVWAP.setStyle(Curve.Firm);
 anchorVWAP.setDefaultColor(Color.cyan);
 anchorVWAP.setlineWeight(3);
