@@ -6,7 +6,7 @@ function sma(data, time_period) {
     return (  
    ( data.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / data.length
     )} else {
-        let nData = data.slice((data.length - (time_period * -1)))
+        let nData = data.slice((time_period * -1))
         return (
             nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
         )
