@@ -13,6 +13,10 @@ function sma(data) {
 
 function ema(data, time_period) {
     const k = 2/(time_period + 1)
-    
+   let emaArr = data[0] // first time the ema will equal the first data point
+    for (let i = 1; i < data.length; i++) {
+        emaArr.push(data[i] * k + emaArr[i - 1] * (1 - k));
+    } 
+    return [...emaArr].pop();
 }
 
