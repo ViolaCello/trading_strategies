@@ -12,11 +12,11 @@ function sma(data) {
 // k = The weighting factor of the EMA, such that: k = 2/(n+1) where n = the selected time period
 
 function ema(data, time_period) {
+    let emaArr = []
     const k = 2/(time_period + 1)
-   let emaArr = data[0] // first time the ema will equal the first data point
+    emaArr[0] = data[0] // first time the ema will equal the first data point
     for (let i = 1; i < data.length; i++) {
         emaArr.push(data[i] * k + emaArr[i - 1] * (1 - k));
     } 
     return [...emaArr].pop();
 }
-
