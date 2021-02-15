@@ -1,10 +1,17 @@
 // Simple moving Average
 // SMA = (period sum) / N where period sum is the sum of data during the N period
 
-function sma(data) {
+function sma(data, time_period) {
+    if (time_period >= data.length) {
     return (  
    ( data.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / data.length
-    )
+    )} else {
+        let nData = data.slice((data.length - (time_period * -1)))
+        return (
+            nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
+        )
+        
+    }
 }
 
 // Exponential Moving Average
