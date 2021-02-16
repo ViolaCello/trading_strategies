@@ -27,3 +27,13 @@ function ema(data, time_period) {
     } 
     return [...emaArr].pop();
 }
+
+// next: Be able to extract data point from an Object like {high: 12, low: 10, open:10, close: 11, Time: 0}
+
+function extractCloseData(dataObj) {
+    closeData = []
+    dataObj.forEach(obj => {
+        closeData.push(obj["close"])
+    })
+    return closeData
+}
