@@ -51,7 +51,7 @@ function atr(rawData, time_period) {
     // True Range Formula = MAX of (high-low; High-PreviousClose; PreviousCLose-Low)
     // Create an array of all True Range Values
     let trueRange = []
-    for (let i = 1; i-1 < rawData.length; i++) {
+    for (let i = 1; i-1 < rawData.length-1; i++) {
         let tr1 = Math.abs(highs[i]-lows[i])
         let tr2 = Math.abs(highs[i] - closes[i-1])
         let tr3 = Math.abs(closes[i-1] - lows[i])
@@ -68,3 +68,13 @@ function atr(rawData, time_period) {
             )
         }
 }
+
+let someData = [
+    {open: 10, high: 20, low: 5, close: 11}, 
+    {open: 11, high: 25, low: 9, close: 20}, 
+    {open: 5, high: 29, low: 4, close: 20}, 
+    {open: 8, high: 32, low: 5, close: 31}, 
+    {open: 9, high: 31, low: 3, close: 30}, 
+    {open: 10, high: 29, low: 5, close: 15}, 
+    {open: 10, high: 26, low: 5, close: 9}
+]
