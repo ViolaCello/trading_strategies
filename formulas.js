@@ -1,7 +1,8 @@
 // Simple moving Average
 // SMA = (period sum) / N where period sum is the sum of data during the N period
 
-function sma(data, time_period) {
+function sma(dataRaw, time_period, parameter) {
+    let data = extractData(dataRaw, parameter)
     if (time_period >= data.length) {
     return (  
    ( data.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / data.length
