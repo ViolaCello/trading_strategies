@@ -57,5 +57,14 @@ function atr(rawData, time_period) {
         let tr3 = Math.abs(closes[i-1] - lows[i])
         trueRange.push(Math.max(tr1, tr2, tr3))
         }
-        
+    // use the array of True Range Values to get the Simple Moving Average of the true range, ie., ATR
+        if (time_period >= trueRange.length) {
+        return (  
+       ( trueRange.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / trueRange.length
+        )} else {
+            let nData = trueRange.slice((time_period * -1))
+            return (
+                nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
+            )
+        }
 }
