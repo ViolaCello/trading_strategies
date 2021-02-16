@@ -30,10 +30,10 @@ function ema(data, time_period) {
 
 // next: Be able to extract data point from an Object like {high: 12, low: 10, open:10, close: 11, Time: 0}
 
-function extractCloseData(dataObj) {
+function extractCloseData(dataObj, key) {
     closeData = []
     dataObj.forEach(obj => {
-        closeData.push(obj["close"])
+        closeData.push(obj[key])
     })
     return closeData
 }
