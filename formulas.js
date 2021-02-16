@@ -39,3 +39,19 @@ function extractData(dataObj, key) {
     })
     return closeData
 }
+
+// Average True Range (ATR)
+
+function atr(rawData, time_period) {
+    // first, we need a data set of only the highs and lows
+    let highs =  extractData(rawData, "high")
+    let lows = extractData(rawData, "low")
+    let closes = extractData(rawData, "close")
+    // Get the True Range
+    // True Range Formula = MAX of (high-low; High-PreviousClose; PreviousCLose-Low)
+    let i = 1
+    let tr1 = Math.abs(highs[i]-lows[i])
+    let tr2 = Math.abs(highs[i] - closes[0])
+    let tr3 = Math.abs(closes[0] - lows[i])
+
+}
