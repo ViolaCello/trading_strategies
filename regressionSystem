@@ -1,0 +1,18 @@
+# original formula
+input price = close;
+input widthOfChannel = 100.0;
+input fullRange = Yes;
+input length = 21;
+
+plot MiddleLR;
+if (fullRange)
+then {
+    MiddleLR = InertiaAll(price);
+} else {
+    MiddleLR = InertiaAll(price, length);
+}
+
+def dist = HighestAll(AbsValue(MiddleLR - price)) * (widthOfChannel / 100.0);
+
+plot UpperLR = MiddleLR + dist;
+plot LowerLR = MiddleLR - dist;
