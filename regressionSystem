@@ -1,5 +1,6 @@
 # original formula
-input price = close;
+input displace = 1;
+def price = close[displace];
 input widthOfChannel = 100.0;
 input fullRange = Yes;
 input length = 21;
@@ -16,3 +17,4 @@ def dist = HighestAll(AbsValue(MiddleLR - price)) * (widthOfChannel / 100.0);
 
 plot UpperLR = MiddleLR + dist;
 plot LowerLR = MiddleLR - dist;
+
