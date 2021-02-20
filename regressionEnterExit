@@ -9,10 +9,6 @@ def islastcandle = if daily then 0 else if SecondsTillTime(closetime) <= AP / 10
 def isfirstcandle = if daily then 0 else if SecondsTillTime(opentime) <= AP / 1000 then 1 else 0;
 def isexittime = if daily then 0 else if SecondsTillTime(exittime) <= AP / 1000 then 1 else 0;
 
-# Make sure there is a trade open before closing, due to script glitch
-def EP = EntryPrice();
-def Con11 = EP == 0;
-
 #Close
 input offset = 1;
 def price = close;
@@ -61,3 +57,21 @@ def dist = HighestAll(AbsValue(MiddleLRL - Low[offset])) * (widthOfChannel / 100
 def UpperLRL = MiddleLRL + dist;
 def LowerLRL = MiddleLRL - dist;
 
+#
+### Conditions
+#
+
+# Make sure there is a trade open before closing, due to script glitch
+def EP = EntryPrice();
+def Con11 = EP == 0;
+
+def Long1 = Low[2]<LowerLRL[1] AND Close[1]>LowerLRL;
+def LongSL = Low<LowerLRL;
+def LongTP = High>=MiddleLR;
+
+# Long Entry script
+AddOrder(OrderType.BUY_TO_OPEN, InLong == 1 and isfirstcandle == 1 and islastcandle <> 1, open);
+AddOrder(OrderType.SELL_TO_CLOSE, Con11 <> 1 and isexittime == 1, close, name = "EndDay");
+
+AddOrder(OrderType.SELL_TO_CLOSE, Con11 <> 1 and LongTP == 1, MiddleLR, name = "TP");
+AddOrder(OrderType.SELL_TO_CLOSE, Con11 <> 1 and LongSL == 1, LowerLRL, name = "SL");
