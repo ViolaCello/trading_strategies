@@ -12,3 +12,23 @@ def isexittime = if daily then 0 else if SecondsTillTime(exittime) <= AP / 1000 
 # Make sure there is a trade open before closing, due to script glitch
 def EP = EntryPrice();
 def Con11 = EP == 0;
+
+#Close
+input offset = 1;
+def price = close;
+input widthOfChannel = 100.0;
+input fullRange = Yes;
+input length = 21;
+
+plot MiddleLR;
+if (fullRange)
+then {
+    MiddleLR = InertiaAll(price[offset]);
+} else {
+    MiddleLR = InertiaAll(price[offset], length);
+}
+
+def dist = HighestAll(AbsValue(MiddleLR - price[offset])) * (widthOfChannel / 100.0);
+
+def UpperLR = MiddleLR + dist;
+def LowerLR = MiddleLR - dist;
