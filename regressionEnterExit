@@ -46,3 +46,18 @@ def dist = HighestAll(AbsValue(MiddleLRH - High[offset])) * (widthOfChannel / 10
 
 def UpperLRH = MiddleLRH + dist;
 def LowerLRH = MiddleLRH - dist;
+
+#Low
+def MiddleLRL;
+if (fullRange)
+then {
+    MiddleLRL = InertiaAll(Low[offset]);
+} else {
+    MiddleLRL = InertiaAll(Low[offset], length);
+}
+
+def dist = HighestAll(AbsValue(MiddleLRL - Low[offset])) * (widthOfChannel / 100.0);
+
+def UpperLRL = MiddleLRL + dist;
+def LowerLRL = MiddleLRL - dist;
+
