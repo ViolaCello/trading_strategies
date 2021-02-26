@@ -79,3 +79,11 @@ let someData = [
     {open: 10, high: 29, low: 5, close: 15}, 
     {open: 10, high: 26, low: 5, close: 9}
 ]
+
+
+// EMA=Price(t)×k+EMA(y)×(1−k)
+// where:
+// t=today
+// y=yesterday
+// N=number of days in EMA
+// k=2÷(N+1)
