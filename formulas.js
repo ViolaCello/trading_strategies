@@ -27,7 +27,8 @@ function ema(dataRaw, time_period, parameter) {
     for (let i = 1; i < data.length; i++) {
         emaArr.push(data[i] * k + emaArr[i - 1] * (1 - k));
     } 
-    return [...emaArr].pop();
+    let currentEma = [...emaArr].pop()
+    return +currentEma.toFixed(2)
 }
 
 // next: Be able to extract data point from an Object like {high: 12, low: 10, open:10, close: 11, Time: 0}
