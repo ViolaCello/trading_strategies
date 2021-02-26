@@ -21,13 +21,14 @@ function sma(dataRaw, time_period, parameter) {
 
 function ema(dataRaw, time_period, parameter) {
     let data = extractData(dataRaw, parameter)
-    let emaArr = []
     const k = 2/(time_period + 1)
-    emaArr[0] = data[0] // first time the ema will equal the first data point
+    let emaData = []
+    emaData[0] = data[0] // first time the ema will equal the first data point
     for (let i = 1; i < data.length; i++) {
-        emaArr.push(data[i] * k + emaArr[i - 1] * (1 - k));
+        let newPoint = (data[i] * k) + (emaData[i-1] * (1-k))
+        emaData.push(newPoint)
     } 
-    let currentEma = [...emaArr].pop()
+    let currentEma = [...emaData].pop()
     return +currentEma.toFixed(2)
 }
 
