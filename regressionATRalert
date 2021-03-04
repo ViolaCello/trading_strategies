@@ -16,11 +16,18 @@ def averageTypeATR = AverageType.WILDERS;
 def dayATR = MovingAverage(averageTypeATR, TrueRange(high(period = AggregationPeriod.Day), close(period = AggregationPeriod.Day), low(period = AggregationPeriod.Day)), 14);
 AddLabel(1, Concat(“Day ATR", dayATR), Color.Cyan);
 
+# ATR now vs ATR 2 hours ago on the 15 minute chart
 
 declare lower;
 
 def averageTypeATR = AverageType.WILDERS;
 def dayATRF = MovingAverage(averageTypeATR, TrueRange(high(period = AggregationPeriod.Day), close(period = AggregationPeriod.Day), low(period = AggregationPeriod.Day)), 14);
 
-plot dayATR = ATRF/92
+
+plot dayATR =MovingAverage(averageTypeATR, TrueRange(high[92], close[92], low[92]), 14);
+
+plot myATRu = MovingAverage(averageTypeATR, TrueRange(high, close, low), 14);
+myATRu.SetDefaultColor(GetColor(4));  
 dayATR.SetDefaultColor(GetColor(8));
+
+# BarNumber ();  
