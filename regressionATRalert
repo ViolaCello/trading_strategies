@@ -85,3 +85,29 @@ plot anchorVWAP9 = if ShowTodayOnly and !Today then Double.NaN else if anchorTim
 anchorVWAP7.setStyle(Curve.Firm);
 anchorVWAP7.setDefaultColor(Color.LIGHT_ORANGE);
 anchorVWAP7.setlineWeight(3);
+
+
+### Add Standard Deviation Bands to the 2am anchorVWAP
+def Num_Dev_Dn = -1.0;
+defNum_Dev_up = 1.0;
+
+def sDev = stdev(data = close, length = 100);
+plot upper = anchorVWAP + (Num_Dev_Up) * sDev;
+plot lower = anchorVWAP + (Num_Dev_Dn * sDev);
+plot upper2 = anchorVWAP + (Num_Dev_Up + 1) * sDev;
+plot upper3 = anchorVWAP + (Num_Dev_Up + 2) * sDev;
+plot lower2 = anchorVWAP + (Num_Dev_Dn - 1) * sDev;
+plot lower3 = anchorVWAP + (Num_Dev_Dn  - 2) * sDev;
+
+upper.setDefaultColor(Color.cyan);
+upper.setlineWeight(1);
+lower.setDefaultColor(Color.cyan);
+lower.setlineWeight(1);
+upper2.setDefaultColor(Color.cyan);
+upper2.setlineWeight(1);
+lower2.setDefaultColor(Color.cyan);
+lower2.setlineWeight(1);
+upper3.setDefaultColor(Color.cyan);
+upper3.setlineWeight(1);
+lower3.setDefaultColor(Color.cyan);
+lower3.setlineWeight(1);
