@@ -111,3 +111,28 @@ upper3.setDefaultColor(Color.cyan);
 upper3.setlineWeight(1);
 lower3.setDefaultColor(Color.cyan);
 lower3.setlineWeight(1);
+
+
+
+### Regression Channel on the Close
+def offset = 1;
+def widthOfChannel = 100.0;
+def fullRange = Yes;
+def lengthR = 21;
+
+plot MiddleLR;
+if (fullRange)
+then {
+    MiddleLR = InertiaAll(close[offset]);
+} else {
+    MiddleLR = InertiaAll(close[offset], lengthR);
+}
+
+def dist = HighestAll(AbsValue(MiddleLR - close[offset])) * (widthOfChannel / 100.0);
+
+plot UpperLR = MiddleLR + dist;
+plot LowerLR = MiddleLR - dist;
+
+MiddleLR.SetDefaultColor(GetColor(5));
+UpperLR.SetDefaultColor(GetColor(5));
+LowerLR.SetDefaultColor(GetColor(5));
