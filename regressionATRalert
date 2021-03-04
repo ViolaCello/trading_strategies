@@ -68,7 +68,7 @@ def postAnchorTime7 = if SecondsFromTime(anchorTime7) >= 0 then 1 else 0;
 def  volumeSum7 = compoundValue(1, if postAnchorTime7 and endAchorTime then volumeSum7[1] + volume else 0, volume);
 def  volumeVwapSum7 = compoundValue(1, if postAnchorTime7 and endAchorTime then volumeVwapSum7[1] + volume * vwap else 0, volume * vwap);
  
-plot anchorVWAP7 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum / volumeSum else Double.NaN;
+plot anchorVWAP7 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum7 / volumeSum7 else Double.NaN;
 anchorVWAP7.setStyle(Curve.Firm);
 anchorVWAP7.setDefaultColor(Color.magenta);
 anchorVWAP7.setlineWeight(3);
@@ -81,7 +81,7 @@ def postAnchorTime9 = if SecondsFromTime(anchorTime9) >= 0 then 1 else 0;
 def  volumeSum9 = compoundValue(1, if postAnchorTime9 and endAchorTime then volumeSum9[1] + volume else 0, volume);
 def  volumeVwapSum9 = compoundValue(1, if postAnchorTime9 and endAchorTime then volumeVwapSum9[1] + volume * vwap else 0, volume * vwap);
  
-plot anchorVWAP9 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum / volumeSum else Double.NaN;
+plot anchorVWAP9 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum9 / volumeSum9 else Double.NaN;
 anchorVWAP7.setStyle(Curve.Firm);
 anchorVWAP7.setDefaultColor(Color.LIGHT_ORANGE);
-anchorVWAP7.setlineWeight(2);
+anchorVWAP7.setlineWeight(3);
