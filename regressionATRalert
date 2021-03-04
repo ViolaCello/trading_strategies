@@ -30,4 +30,8 @@ plot myATRu = MovingAverage(averageTypeATR, TrueRange(high, close, low), 14);
 myATRu.SetDefaultColor(GetColor(4));  
 dayATR.SetDefaultColor(GetColor(8));
 
-# BarNumber ();  
+
+# gives you the closing price of the first bar on the chart
+def bn = BarNumber();
+def here = getValue(close, bn-1);
+AddLabel(1, Concat("CurrentBar#",  here), Color.Cyan);
