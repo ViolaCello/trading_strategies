@@ -36,17 +36,82 @@ def bn = BarNumber();
 def here = getValue(close, bn-1);
 AddLabel(1, Concat("CurrentBar#",  here), Color.Cyan);
 
-
 ### Below, the complete alert and System in one chart:
 
+
+### Regression Channel on the Close
+def offset = 1;
+def widthOfChannel = 100.0;
+def fullRange = Yes;
+def lengthR = 21;
+
+plot MiddleLR;
+if (fullRange)
+then {
+    MiddleLR = InertiaAll(close[offset]);
+} else {
+    MiddleLR = InertiaAll(close[offset], lengthR);
+}
+
+def dist = HighestAll(AbsValue(MiddleLR - close[offset])) * (widthOfChannel / 100.0);
+
+plot UpperLR = MiddleLR + dist;
+plot LowerLR = MiddleLR - dist;
+
+MiddleLR.SetDefaultColor(GetColor(5));
+UpperLR.SetDefaultColor(GetColor(5));
+LowerLR.SetDefaultColor(GetColor(5));
+
+
+
+### Regression Channel on the High
+plot HighLR;
+if (fullRange)
+then {
+    HighLR = InertiaAll(high[offset]);
+} else {
+    HighLR = InertiaAll(high[offset], lengthR);
+}
+
+def distH = HighestAll(AbsValue(HighLR - high[offset])) * (widthOfChannel / 100.0);
+
+plot HighUpperLR = HighLR + distH;
+plot HighLowerLR = HighLR - distH;
+
+HighLR.SetDefaultColor(Color.Green);
+HighUpperLR.SetDefaultColor(Color.Green);
+HighLowerLR.SetDefaultColor(Color.Green);
+HighLR.setlineWeight(1);
+HighUpperLR.setlineWeight(1);
+HighLowerLR.setlineWeight(1);
+
+
+### Regression Channel on the Low
+plot LowLR;
+if (fullRange)
+then {
+    LowLR = InertiaAll(low[offset]);
+} else {
+    LowLR = InertiaAll(low[offset], lengthR);
+}
+
+def distL = HighestAll(AbsValue(LowLR - low[offset])) * (widthOfChannel / 100.0);
+
+plot LowUpperLR = LowLR + dist;
+plot LowLowerLR = LowLR - dist;
+
+LowLR.SetDefaultColor(Color.Yellow);
+LowUpperLR.SetDefaultColor(Color.Yellow);
+LowLowerLR.SetDefaultColor(Color.Yellow);
+LowLR.setlineWeight(1);
+LowUpperLR.setlineWeight(1);
+LowLowerLR.setlineWeight(1);
+
+
 #2am Anchored VWAP
-declare hide_on_daily;
-
-
-
 def anchorTime = 0200;
 def anchorEnd = 1600;
-def ShowTodayOnly = yes;
+def ShowTodayOnly = no;
 def Today = if GetDay() == GetLastDay() then 1 else 0;
 def postAnchorTime = if SecondsFromTime(anchorTime) >= 0 then 1 else 0;
 def endAchorTime = if SecondsTillTime(anchorEnd) >= 0 then 1 else 0;
@@ -86,10 +151,9 @@ anchorVWAP7.setStyle(Curve.Firm);
 anchorVWAP7.setDefaultColor(Color.LIGHT_ORANGE);
 anchorVWAP7.setlineWeight(3);
 
-
 ### Add Standard Deviation Bands to the 2am anchorVWAP
 def Num_Dev_Dn = -1.0;
-defNum_Dev_up = 1.0;
+def Num_Dev_up = 1.0;
 
 def sDev = stdev(data = close, length = 100);
 plot upper = anchorVWAP + (Num_Dev_Up) * sDev;
@@ -114,25 +178,4 @@ lower3.setlineWeight(1);
 
 
 
-### Regression Channel on the Close
-def offset = 1;
-def widthOfChannel = 100.0;
-def fullRange = Yes;
-def lengthR = 21;
 
-plot MiddleLR;
-if (fullRange)
-then {
-    MiddleLR = InertiaAll(close[offset]);
-} else {
-    MiddleLR = InertiaAll(close[offset], lengthR);
-}
-
-def dist = HighestAll(AbsValue(MiddleLR - close[offset])) * (widthOfChannel / 100.0);
-
-plot UpperLR = MiddleLR + dist;
-plot LowerLR = MiddleLR - dist;
-
-MiddleLR.SetDefaultColor(GetColor(5));
-UpperLR.SetDefaultColor(GetColor(5));
-LowerLR.SetDefaultColor(GetColor(5));
