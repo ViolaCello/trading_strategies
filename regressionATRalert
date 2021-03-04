@@ -35,3 +35,53 @@ dayATR.SetDefaultColor(GetColor(8));
 def bn = BarNumber();
 def here = getValue(close, bn-1);
 AddLabel(1, Concat("CurrentBar#",  here), Color.Cyan);
+
+
+### Below, the complete alert and System in one chart:
+
+#2am Anchored VWAP
+declare hide_on_daily;
+
+
+
+def anchorTime = 0200;
+def anchorEnd = 1600;
+def ShowTodayOnly = yes;
+def Today = if GetDay() == GetLastDay() then 1 else 0;
+def postAnchorTime = if SecondsFromTime(anchorTime) >= 0 then 1 else 0;
+def endAchorTime = if SecondsTillTime(anchorEnd) >= 0 then 1 else 0;
+
+#plot anchorVWAP for intraday
+def  volumeSum = compoundValue(1, if postAnchorTime and endAchorTime then volumeSum[1] + volume else 0, volume);
+def  volumeVwapSum = compoundValue(1, if postAnchorTime and endAchorTime then volumeVwapSum[1] + volume * vwap else 0, volume * vwap);
+ 
+plot anchorVWAP = if ShowTodayOnly and !Today then Double.NaN else if anchorTime then volumeVwapSum / volumeSum else Double.NaN;
+anchorVWAP.setStyle(Curve.Firm);
+anchorVWAP.setDefaultColor(Color.cyan);
+anchorVWAP.setlineWeight(3);
+
+#AVWAP for 7am
+def anchorTime7 = 0700;
+def postAnchorTime7 = if SecondsFromTime(anchorTime7) >= 0 then 1 else 0;
+
+#plot anchorVWAP for intraday 7am
+def  volumeSum7 = compoundValue(1, if postAnchorTime7 and endAchorTime then volumeSum7[1] + volume else 0, volume);
+def  volumeVwapSum7 = compoundValue(1, if postAnchorTime7 and endAchorTime then volumeVwapSum7[1] + volume * vwap else 0, volume * vwap);
+ 
+plot anchorVWAP7 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum / volumeSum else Double.NaN;
+anchorVWAP7.setStyle(Curve.Firm);
+anchorVWAP7.setDefaultColor(Color.magenta);
+anchorVWAP7.setlineWeight(3);
+
+#AVWAP for 9:30am
+def anchorTime9 = 0930;
+def postAnchorTime9 = if SecondsFromTime(anchorTime9) >= 0 then 1 else 0;
+
+#plot anchorVWAP for intraday 9:30am
+def  volumeSum9 = compoundValue(1, if postAnchorTime9 and endAchorTime then volumeSum9[1] + volume else 0, volume);
+def  volumeVwapSum9 = compoundValue(1, if postAnchorTime9 and endAchorTime then volumeVwapSum9[1] + volume * vwap else 0, volume * vwap);
+ 
+plot anchorVWAP9 = if ShowTodayOnly and !Today then Double.NaN else if anchorTime7 then volumeVwapSum / volumeSum else Double.NaN;
+anchorVWAP7.setStyle(Curve.Firm);
+anchorVWAP7.setDefaultColor(Color.LIGHT_ORANGE);
+anchorVWAP7.setlineWeight(2);
