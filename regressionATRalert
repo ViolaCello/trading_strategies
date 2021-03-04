@@ -1,0 +1,17 @@
+### setiing a chart to give an alert signal
+# when price hits the lower band of the Regression Channel
+# If the opening chart price is lower than the current center regression line 
+# (ie., suggesting bullish)
+
+
+# Like this: AddLabel(1, Concat(“Long SL =", LL), Color.Cyan);
+
+# ATR lower indicator 
+ #compares the daily ATR divided by 92 (23 hours of trading, therefore 92 15-minute increments on the 15 min chart)
+ # with another line of the current ATR on the current 15 minute chart
+
+
+
+def averageTypeATR = AverageType.WILDERS;
+def dayATR = MovingAverage(averageTypeATR, TrueRange(high(period = AggregationPeriod.Day), close(period = AggregationPeriod.Day), low(period = AggregationPeriod.Day)), 14);
+AddLabel(1, Concat(“Day ATR", dayATR), Color.Cyan);
