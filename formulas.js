@@ -1,13 +1,13 @@
 // Simple moving Average
 // SMA = (period sum) / N where period sum is the sum of data during the N period
 
-function sma(dataRaw, time_period, parameter) {
+function sma(dataRaw, timePeriod, parameter) {
     let data = extractData(dataRaw, parameter)
-    if (time_period >= data.length) {
+    if (timePeriod >= data.length) {
     return (  
    ( data.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / data.length
     )} else {
-        let nData = data.slice((time_period * -1))
+        let nData = data.slice((timePeriod * -1))
         return (
             nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
         )
@@ -19,9 +19,9 @@ function sma(dataRaw, time_period, parameter) {
 // EMA = k x (Current data point - Previous EMA) + Pervious EMA
 // k = The weighting factor of the EMA, such that: k = 2/(n+1) where n = the selected time period
 
-function ema(dataRaw, time_period, parameter) {
+function ema(dataRaw, timePeriod, parameter) {
     let data = extractData(dataRaw, parameter)
-    const k = 2/(time_period + 1)
+    const k = 2/(timePeriod + 1)
     let emaData = []
     emaData[0] = data[0] // first time the ema will equal the first data point
     for (let i = 1; i < data.length; i++) {
