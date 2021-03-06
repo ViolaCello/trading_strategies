@@ -60,7 +60,7 @@ function atr(rawData, timePeriod) {
         trueRange.push(Math.max(tr1, tr2, tr3))
         }
     // use the array of True Range Values to get the Simple Moving Average of the true range, ie., ATR
-        if (timePeriod >= trueRange.length) {
+        if (timePeriod >= trueRange.length) { // if the timePeriod is greater then the entire dataset, just return the average of the whole set
         return (  
        ( trueRange.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / trueRange.length
         )} else {
