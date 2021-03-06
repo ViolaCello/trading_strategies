@@ -9,7 +9,7 @@ function sma(dataRaw, timePeriod, parameter) {
     )} else {
         let nData = data.slice((timePeriod * -1))
         return (
-            nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
+            nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / timePeriod
         )
         
     }
@@ -66,7 +66,7 @@ function atr(rawData, timePeriod) {
         )} else {
             let nData = trueRange.slice((timePeriod * -1))
             return (
-                nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
+                nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / timePeriod
             )
         }
 }
