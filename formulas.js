@@ -44,7 +44,7 @@ function extractData(dataObj, key) {
 
 // Average True Range (ATR)
 
-function atr(rawData, time_period) {
+function atr(rawData, timePeriod) {
     // first, we need a data set of only the highs and lows
     let highs =  extractData(rawData, "high")
     let lows = extractData(rawData, "low")
@@ -60,11 +60,11 @@ function atr(rawData, time_period) {
         trueRange.push(Math.max(tr1, tr2, tr3))
         }
     // use the array of True Range Values to get the Simple Moving Average of the true range, ie., ATR
-        if (time_period >= trueRange.length) {
+        if (timePeriod >= trueRange.length) {
         return (  
        ( trueRange.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 ) ) / trueRange.length
         )} else {
-            let nData = trueRange.slice((time_period * -1))
+            let nData = trueRange.slice((timePeriod * -1))
             return (
                 nData.reduce(( accumulator, currentValue ) => accumulator + currentValue, 0 )  / time_period
             )

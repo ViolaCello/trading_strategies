@@ -176,6 +176,3 @@ upper3.setlineWeight(1);
 lower3.setDefaultColor(Color.cyan);
 lower3.setlineWeight(1);
 
-
-
-
