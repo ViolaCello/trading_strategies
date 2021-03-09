@@ -29,3 +29,4 @@ def here = GetValue(MiddleLR, bn - 1);
 def bullish = middleLR > here;
 def bear = middleLR < here;
 
+plot result = (Abs(middleLR-here)) / dayATRF
