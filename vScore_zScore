@@ -1,7 +1,4 @@
-#
-# Tony's Phat V-Score
-# Not to be confused with VD or any other nasty stuff...
-# Lets go
+
 
 def anchorTime = 0200;
 def anchorEnd = 1615;
