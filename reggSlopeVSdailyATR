@@ -1,0 +1,32 @@
+declare lower;
+
+def averageTypeATR = AverageType.WILDERS;
+def dayATRF = MovingAverage(averageTypeATR, TrueRange(high(period = AggregationPeriod.Day), close(period = AggregationPeriod.Day), low(period = AggregationPeriod.Day)), 14);
+
+
+def offset = 1;
+def widthOfChannel = 100.0;
+def fullRange = yes;
+def lengthR = 21;
+
+plot MiddleLR;
+if (fullRange)
+then {
+    MiddleLR = InertiaAll(close[offset]);
+} else {
+    MiddleLR = InertiaAll(close[offset], lengthR);
+}
+
+def dist = HighestAll(AbsValue(MiddleLR - close[offset])) * (widthOfChannel / 100.0);
+
+
+
+# gives you the value of the regression slope on the first bar on the chart
+def bn = BarNumber();
+def here = GetValue(MiddleLR, bn - 1);
+
+
+def bullish = middleLR > here;
+def bear = middleLR < here;
+
+plot result = (Abs(middleLR-here)) / dayATRF
