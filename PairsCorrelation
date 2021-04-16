@@ -1,0 +1,11 @@
+declare lower;
+
+input length = 10;
+
+
+
+plot Correlation = correlation(close(getSymbolPart(1)), close(getSymbolPart(2)), length);
+Correlation.SetDefaultColor(GetColor(5));
+
+plot av = Average(Correlation, (length*10));
+av.SetDefaultColor(GetColor(3));
